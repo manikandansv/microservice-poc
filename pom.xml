@@ -1,0 +1,156 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.poc.microservice</groupId>
+	<artifactId>microservice-poc</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>microservice-poc</name>
+
+	<parent>
+		<groupId>org.springframework.cloud</groupId>
+		<artifactId>spring-cloud-starter-parent</artifactId>
+		<version>Finchley.RELEASE</version>
+	</parent>
+
+	<properties>
+		<java.version>1.8</java.version>
+
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.plugin>3.7.0</maven.compiler.plugin>
+		<maven-resources.plugin.version>3.1.0</maven-resources.plugin.version>
+
+		<spring.version>5.1.0.RELEASE</spring.version>
+		<spring.cloud.dependencies.version>2.0.1.RELEASE</spring.cloud.dependencies.version>
+		<spring.boot.version>2.0.5.RELEASE</spring.boot.version>
+
+		<zipkin.version>2.11.6</zipkin.version>
+		
+		<logstash.version>5.2</logstash.version>
+		<logback.version>1.2.3</logback.version>
+		
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter</artifactId>
+				<version>${spring.boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-actuator</artifactId>
+				<version>${spring.boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+				<version>${spring.cloud.dependencies.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+				<version>${spring.cloud.dependencies.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+				<version>${spring.cloud.dependencies.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-actuator</artifactId>
+				<version>${spring.boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-sleuth</artifactId>
+				<version>${spring.cloud.dependencies.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-sleuth-zipkin</artifactId>
+				<version>${spring.cloud.dependencies.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-openfeign</artifactId>
+				<version>${spring.cloud.dependencies.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.zipkin.java</groupId>
+				<artifactId>zipkin-server</artifactId>
+				<version>${zipkin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.zipkin.zipkin2</groupId>
+				<artifactId>zipkin</artifactId>
+				<version>${zipkin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.zipkin.java</groupId>
+				<artifactId>zipkin-autoconfigure-ui</artifactId>
+				<version>${zipkin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.logstash.logback</groupId>
+				<artifactId>logstash-logback-encoder</artifactId>
+				<version>${logstash.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven.compiler.plugin}</version>
+					<configuration>
+						<source>${maven.compiler.source}</source>
+						<target>${maven.compiler.source}</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${spring.boot.version}</version>
+				</plugin>
+			</plugins>
+
+		</pluginManagement>
+
+	</build>
+
+
+	<modules>
+		<module>microservice-poc-account-service</module>
+		<module>microservice-poc-customer-service</module>
+		<module>microservice-poc-discovery-service</module>
+		<module>microservice-poc-gateway-service</module>
+		<module>microservice-poc-zipkin-service</module>
+	</modules>
+</project>
