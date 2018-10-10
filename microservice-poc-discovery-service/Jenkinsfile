@@ -19,6 +19,7 @@ node {
         }
 
         stage('Build Image') {
+        	print 'Build Image'
             dir ('microservice-poc-discovery-service') {
                 sh 'docker build -t "manisv/microservice-poc-discovery-service:${env.version}" .'
                 //app.push()
