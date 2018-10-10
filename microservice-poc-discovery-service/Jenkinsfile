@@ -5,7 +5,7 @@ node {
     	print 'Inside Discovery-Service Jenkins File'
 
         stage('Checkout') {
-            git url: 'git@github.com:manikandansv/microservice-poc.git', credentialsId: 'microservice-poc', branch: 'master'
+            git url: 'https://github.com/manikandansv/microservice-poc.git', credentialsId: 'microservice-poc', branch: 'master'
         }
 
         stage('Build') {
