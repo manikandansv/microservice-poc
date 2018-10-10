@@ -1,5 +1,7 @@
 node {
 
+	def app
+
     withMaven(maven:'maven') {
     
     	print 'Inside Discovery-Service Jenkins File'
@@ -16,12 +18,21 @@ node {
             env.version = pom.version
         }
 
-//        stage('Image') {
-//            dir ('discovery-service') {
-//                def app = docker.build "localhost:5000/discovery-service:${env.version}"
-//                app.push()
-//            }
-//        }
+        stage('Build Image') {
+            dir ('discovery-service') {
+                sh 'docker build -t "manisv/microservice-poc-discovery-service:${env.version}" .'
+                //app.push()
+            }
+        }
+        
+        stage('Push Image') {
+            steps {
+        		   withDockerRegistry([ credentialsId: "6544de7e-17a4-4576-9b9b-e86bc1e4f903", url: "" ]) {
+         			 sh 'docker push manisv/microservice-poc-discovery-service:${env.version}'
+       			 }
+       		}
+        }
+
 //
 //        stage ('Run') {
 //            docker.image("localhost:5000/discovery-service:${env.version}").run('-p 8761:8761 -h discovery --name discovery')
@@ -30,7 +41,6 @@ node {
 //        stage ('Final') {
 //            build job: 'account-service-pipeline', wait: false
 //        }      
-
-    }
+	}
 
 }
