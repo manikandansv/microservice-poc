@@ -30,6 +30,10 @@ node {
             		docker.withRegistry('https://registry.hub.docker.com','DockerHub'){
             		    app.push()
             		}
+            		docker.withRegistry('https://335191158991.dkr.ecr.ap-south-1.amazonaws.com','ecr:ap-south-1:aws-ecr'){
+            		    app.push();
+            		}
+
        	
         }
 
