@@ -1,5 +1,7 @@
 node {
 
+	def app
+
     withMaven(maven:'maven') {
 
         stage('Checkout') {
@@ -14,20 +16,26 @@ node {
             env.version = pom.version
         }
 
-        stage('Image') {
+        stage('Build Image') {
             dir ('account-service') {
-                def app = docker.build "localhost:5000/account-service:${env.version}"
-                app.push()
+                app = docker.build "manisv/microservice-poc-account-service:${env.version}"
             }
         }
-
-        stage ('Run') {
-            docker.image("localhost:5000/account-service:${env.version}").run('-p 2222:2222 -h account --name account --link discovery')
+         
+        stage('Push Image') {
+        	print 'Push Image'
+            		docker.withRegistry('https://registry.hub.docker.com','DockerHub'){
+            		    app.push()
+            		} 	
         }
 
-        stage ('Final') {
-            build job: 'customer-service-pipeline', wait: false
-        }      
+//        stage ('Run') {
+//            docker.image("localhost:5000/account-service:${env.version}").run('-p 2222:2222 -h account --name account --link discovery')
+//        }
+
+//        stage ('Final') {
+//            build job: 'customer-service-pipeline', wait: false
+//        }      
 
     }
 

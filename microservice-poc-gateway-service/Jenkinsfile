@@ -1,5 +1,7 @@
 node {
 
+	def app
+
     withMaven(maven:'maven') {
 
         stage('Checkout') {
@@ -14,16 +16,22 @@ node {
             env.version = pom.version
         }
 
-        stage('Image') {
+        stage('Build Image') {
             dir ('gateway-service') {
-                def app = docker.build "localhost:5000/gateway-service:${env.version}"
-                app.push()
+                app = docker.build "manisv/microservice-poc-gateway-service:${env.version}"
             }
         }
-
-        stage ('Run') {
-            docker.image("localhost:5000/gateway-service:${env.version}").run('-p 3333:3333 -h gateway --name gateway --link discovery --link account --link customer')
+        
+         stage('Push Image') {
+        	print 'Push Image'
+            		docker.withRegistry('https://registry.hub.docker.com','DockerHub'){
+            		    app.push()
+            		} 	
         }
+
+//        stage ('Run') {
+//            docker.image("localhost:5000/gateway-service:${env.version}").run('-p 3333:3333 -h gateway --name gateway --link discovery --link account --link customer')
+//        }
      
 
     }

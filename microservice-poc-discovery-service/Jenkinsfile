@@ -22,8 +22,6 @@ node {
         	print 'Build Image'
             dir ('microservice-poc-discovery-service') {
             	app = docker.build "manisv/microservice-poc-discovery-service:${env.version}"
-                //sh 'docker build -t "manisv/microservice-poc-discovery-service:${env.version}" .'
-                //app.push()
             }
         }
         
