@@ -1,6 +1,7 @@
 node {
 
 	def app
+	def ecrApp
 
     withMaven(maven:'maven') {
 
@@ -19,6 +20,7 @@ node {
         stage('Build Image') {
             dir ('microservice-poc-gateway-service') {
                 app = docker.build "manisv/microservice-poc-gateway-service:${env.version}"
+                ecrApp = docker.build "microservice-poc-gateway-service:${env.version}"
             }
         }
         
@@ -27,6 +29,9 @@ node {
             		docker.withRegistry('https://registry.hub.docker.com','DockerHub'){
             		    app.push()
             		} 	
+            		docker.withRegistry('https://335191158991.dkr.ecr.ap-south-1.amazonaws.com','ecr:ap-south-1:aws-ecr'){
+            		    ecrApp.push();
+            		}
         }
 
 //        stage ('Run') {
