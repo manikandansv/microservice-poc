@@ -29,11 +29,10 @@ node {
         
         stage('Push Image') {
         	print 'Push Image'
-            steps {
             		docker.withRegistry('https://registry.hub.docker.com','DockerHub'){
             		    app.push()
             		}
-       		}
+       	
         }
 
 //
