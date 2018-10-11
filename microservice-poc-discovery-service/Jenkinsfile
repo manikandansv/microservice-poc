@@ -1,6 +1,7 @@
 node {
 
 	def app
+	def ecrApp
 
     withMaven(maven:'maven') {
     
@@ -22,6 +23,7 @@ node {
         	print 'Build Image'
             dir ('microservice-poc-discovery-service') {
             	app = docker.build "manisv/microservice-poc-discovery-service:${env.version}"
+            	ecrApp = docker.build "microservice-poc-discovery-service:${env.version}"
             }
         }
         
@@ -31,7 +33,7 @@ node {
             		    app.push()
             		}
             		docker.withRegistry('https://335191158991.dkr.ecr.ap-south-1.amazonaws.com','ecr:ap-south-1:aws-ecr'){
-            		    app.push();
+            		    ecrApp.push();
             		}
 
        	
