@@ -19,7 +19,6 @@ node {
         stage('Build Image') {
             dir ('microservice-poc-customer-service') {
                 app = docker.build "manisv/microservice-poc-customer-service:${env.version}"
-                app.push()
             }
         }
 
