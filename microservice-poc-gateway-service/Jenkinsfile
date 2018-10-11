@@ -17,7 +17,7 @@ node {
         }
 
         stage('Build Image') {
-            dir ('gateway-service') {
+            dir ('microservice-poc-gateway-service') {
                 app = docker.build "manisv/microservice-poc-gateway-service:${env.version}"
             }
         }
