@@ -17,16 +17,13 @@ spring:
       org.hibernate: WARN
 
 eureka:  
+  client:
+    serviceUrl:
+      defaultZone: ${DISCOVERY_URL:http://localhost:8761}/eureka/
   instance:
     hostname: localhost
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
-  client:
-    register-with-eureka: true
-    fetch-registry: false
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
- 
       
 ribbon:
   eureka:
