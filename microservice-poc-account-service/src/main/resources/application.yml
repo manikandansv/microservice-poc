@@ -14,13 +14,11 @@ spring:
 eureka:  
   client:
     serviceUrl:
-      defaultZone: http://hostip:8761/eureka/
+      defaultZone: http://eureka-server:8761}/eureka/
   instance:
     hostname: localhost
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
-    preferIpAddress: true
-    
       
 ribbon:
   eureka:
