@@ -1,19 +1,30 @@
 server:  
-  port: 8761
+  port: ${appPort:8761}
+    
+management:
+   contextPath: /admin
     
 eureka:  
+  environment: ${environment}
+  datacenter: ${dataCenter}
+  enableSelfPreservation: false 
   instance:
-    hostname: discovery
+    hostname: ${hostName}
+    preferIpAddress: true
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-       defaultZone: http://discovery:8761/eureka/       
-  server:
-    enableSelfPreservation: false 
-
+       defaultZone: ${peerUrls}      
+    
+---
 spring:
-   cloud:
-      config:
-         discovery:
-            enabled: true
+  profiles: standalone
+hostName: localhost
+environment: local
+dataCenter: ${hostName}
+peerUrls: http://localhost:${server.port}/eureka/
+
+---
+spring:
+  profiles: peerAware

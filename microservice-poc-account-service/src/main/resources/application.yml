@@ -1,5 +1,5 @@
 server:  
-  port: 2222
+  port: ${appPort:2222}
 
 spring:  
   application:
@@ -15,10 +15,11 @@ eureka:
   enabled: true
   client:
     serviceUrl:
-      defaultZone: http://discovery:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
       registerWithEureka: true
       fetchRegistry: true
   instance:
+    hostname: ${hostName}
     preferIpAddress: true
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
