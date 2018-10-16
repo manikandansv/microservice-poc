@@ -12,9 +12,10 @@ spring:
       org.hibernate: WARN
 
 eureka:  
+  enabled: true
   client:
     serviceUrl:
-      defaultZone: http://eureka-server:8761}/eureka/
+      defaultZone: http://eureka-server:8761/eureka/
   instance:
     hostname: localhost
     leaseRenewalIntervalInSeconds: 1
