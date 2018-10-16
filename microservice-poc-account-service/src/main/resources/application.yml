@@ -16,7 +16,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: ${DISCOVERY_URL:http://0.0.0.0:8761}/eureka/
+      defaultZone: ${DISCOVERY_URL:http://localhost:8761}/eureka/
   instance:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2

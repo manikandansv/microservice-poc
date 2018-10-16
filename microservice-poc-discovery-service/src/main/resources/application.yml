@@ -9,3 +9,4 @@ eureka:
     fetchRegistry: false
   server:
     enableSelfPreservation: false 
+    defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
