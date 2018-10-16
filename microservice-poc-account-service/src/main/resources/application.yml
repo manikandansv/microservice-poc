@@ -1,5 +1,5 @@
 server:  
-  port: ${appPort:2222}
+  port: ${PORT:2222}
 
 spring:  
   application:
@@ -12,15 +12,10 @@ spring:
       org.hibernate: WARN
 
 eureka:  
-  enabled: true
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-      registerWithEureka: true
-      fetchRegistry: true
+      defaultZone: ${DISCOVERY_URL:http://localhost:8761}/eureka/
   instance:
-    hostname: ${hostName}
-    preferIpAddress: true
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
       
