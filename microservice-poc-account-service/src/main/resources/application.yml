@@ -10,6 +10,10 @@ spring:
     level:
       org.springframework: WARN
       org.hibernate: WARN
+  cloud:
+     config:
+        uri:${DISCOVERY_URL:http://localhost:8761}/
+           
 
 eureka:  
   client:
